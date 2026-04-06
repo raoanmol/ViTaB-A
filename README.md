@@ -180,3 +180,23 @@ Checkpoints are stored under `src/checkpoints/`.
 - Running from `src/` is recommended because default paths are defined relative to that directory.
 - If few-shot validation examples are unavailable at the dataset path, the prompt builder falls back to placeholder examples.
 - Large models may require significant GPU memory and can offload to CPU/disk automatically.
+
+# Minor-er Issues:
+1. JSON prompt needs tweaking
+2. `src/config.py:58-63` defaul list only includes Qwen3-VL. If we run with default, we'll only benchmark Qwen3-VL
+
+
+
+# TODO:
+1. Implement Brier Score calculator
+2. Implement Family Scaling Score (FSS)
+3. Update CLI defaults for `--max-samples` (default 500, actual 200) and `--single-cell-only` (default False, actual True)
+
+
+# Paper Issues:
+## Issue [1] Internal confidence not normalized across all cells
+- **Files:** `src/confidence_extractor.py`
+
+- **Description:** It's supposed to be $P_{IC}(c) = \frac{P(c)}{\sum_{c' \in C} P(c')}$ (normalize the predicted cell's probability against the sum across ALL cells.) The code currently just calculates the geometric mean of token probabilities for each predicted cell but doesn't normalize against other cells. `compute_aggrergate_confidence()` takes mean/max/min of per-cell values. The `compute_all_cell_probabilities()` function assigns 0.0 to all non-predicted cells (we can only compute the probabilities only for the path the model actually took), making normalization impossible anyway. Ultimately, the confidence scores can't be comparable across different table sizes.
+
+- **Fix:** Update formula in the paper.

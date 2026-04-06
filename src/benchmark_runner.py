@@ -2,8 +2,8 @@
 """
 VisualCite Attribution Benchmark Runner
 
-Benchmarks Qwen3-VL models on cell attribution task across:
-- Multiple model sizes (2B, 4B, 8B, 30B)
+Benchmarks all models on cell attribution task across:
+- Multiple model sizes (2B, 4B, 8B, 30B, ...)
 - Multiple data representations (JSON, Markdown, Images)
 - Multiple prompting strategies (Zero-shot, Few-shot, Chain-of-Thought)
 """

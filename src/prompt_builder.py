@@ -18,7 +18,7 @@ class PromptBuilder:
 
         Args:
             jsonl_path: Path to JSONL dataset file
-            num_examples: Number of few-shot examples to load (default: 2)
+            num_examples: Number of few-shot examples to load (default: 10)
         """
         self.jsonl_path = jsonl_path
         self.num_examples = num_examples
