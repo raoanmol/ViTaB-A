@@ -200,3 +200,9 @@ Checkpoints are stored under `src/checkpoints/`.
 - **Description:** It's supposed to be $P_{IC}(c) = \frac{P(c)}{\sum_{c' \in C} P(c')}$ (normalize the predicted cell's probability against the sum across ALL cells.) The code currently just calculates the geometric mean of token probabilities for each predicted cell but doesn't normalize against other cells. `compute_aggrergate_confidence()` takes mean/max/min of per-cell values. The `compute_all_cell_probabilities()` function assigns 0.0 to all non-predicted cells (we can only compute the probabilities only for the path the model actually took), making normalization impossible anyway. Ultimately, the confidence scores can't be comparable across different table sizes.
 
 - **Fix:** Update formula in the paper.
+
+
+I need you to act as a project manager. You'll be designing the project architecture and work plans. You'll divide the project into small features. For each. feature, you will create a development instructions markdown file and a test instructions markdown file. These will be given to individual, smaller, coding agents. The testing agents will write a report that you will ultimately review to verify their work. Each of your markdown files should be fully contained prompts that the agents can read and finish everything.
+
+Now, for the project details:
+We want to implement experiments for a research paper. The core idea is to find the following metrics for attribution/citation for that for Qwen3, Molmo2, InternVL3.5, Gemma3 ./data/vitab-a.jsonl we want to go 
