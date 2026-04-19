@@ -1,2 +1,5 @@
+.venv
 /vitab_venv/
 ViTaB_A_CVPR.pdf
+.DS_Store
+__pycache__/
