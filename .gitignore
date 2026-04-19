@@ -1,5 +1,6 @@
 .venv
 /vitab_venv/
-ViTaB_A_CVPR.pdf
-.DS_Store
 __pycache__/
+.DS_Store
+/data/fetaqa/
+/data/hitab/
