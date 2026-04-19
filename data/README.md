@@ -1,21 +1,29 @@
 ---
-dataset_info:
-  - config_name: hitab
-    data_files:
-      - split: train
-        path: hitab/train.jsonl
-      - split: validation
-        path: hitab/validation.jsonl
-      - split: test
-        path: hitab/test.jsonl
-  - config_name: fetaqa
-    data_files:
-      - split: train
-        path: fetaqa/train.jsonl
-      - split: validation
-        path: fetaqa/validation.jsonl
-      - split: test
-        path: fetaqa/test.jsonl
+language:
+- en
+license: apache-2.0
+pretty_name: ViTaB-A
+task_categories:
+- question-answering
+tags:
+- table-question-answering
+configs:
+- config_name: hitab
+  data_files:
+  - split: train
+    path: hitab/train.jsonl
+  - split: validation
+    path: hitab/validation.jsonl
+  - split: test
+    path: hitab/test.jsonl
+- config_name: fetaqa
+  data_files:
+  - split: train
+    path: fetaqa/train.jsonl
+  - split: validation
+    path: fetaqa/validation.jsonl
+  - split: test
+    path: fetaqa/test.jsonl
 ---
 
 # ViTaB-A Dataset
@@ -32,9 +40,8 @@ A normalized table question answering dataset for the ViTaB-A research project.
 ```python
 from datasets import load_dataset
 
-# Load a specific config
-hitab = load_dataset("path/to/ViTaB-A", "hitab")
-fetaqa = load_dataset("path/to/ViTaB-A", "fetaqa")
+hitab = load_dataset("raoanmol/ViTaB-A", "hitab")
+fetaqa = load_dataset("raoanmol/ViTaB-A", "fetaqa")
 ```
 
 ## Schema
@@ -48,8 +55,6 @@ Each sample contains:
 | `question` | string | Natural language question about the table |
 | `answer` | list or string | Answer (list for HiTab, string for FeTaQA) |
 | `citation` | list[str] | Excel-style cell references (e.g. `["=E7"]`) |
-| `table_json` | dict | Simplified table with keys: title (string), header (list of header rows), rows (list of data rows) |
-| `table_md` | string | Markdown representation of the table with Excel-style row/column labels |
-| `table_images` | dict | Table images as base64 PNGs. Keys: arial, times_new_roman, red, blue, green. Unrendered variants are empty strings. |
+| `table_json` | dict | Simplified table with keys: `title` (string), `header` (list of header rows), `rows` (list of data rows) |
 | `source` | string | Source dataset and split (e.g. `hitab_train`) |
 | `source_id` | string | Original ID from source dataset |
