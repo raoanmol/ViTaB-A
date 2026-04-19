@@ -16,7 +16,11 @@ def simplify_table(hitab_json: dict) -> dict:
     for region in hitab_json.get("merged_regions", []):
         anchor_value = texts[region["first_row"]][region["first_column"]]
         for r in range(region["first_row"], region["last_row"] + 1):
+            if r >= len(texts):
+                continue
             for c in range(region["first_column"], region["last_column"] + 1):
+                if c >= len(texts[r]):
+                    continue
                 texts[r][c] = anchor_value
 
     # Split into header and rows
