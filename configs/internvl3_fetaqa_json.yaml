@@ -1,0 +1,13 @@
+experiment_name: internvl3_fetaqa_json_zeroshot
+model: internvl3
+dataset: fetaqa
+split: test
+table_repr: json
+prompt_strategy: zero_shot
+task: inference
+max_new_tokens: 512
+temperature: 0.0
+dtype: bfloat16
+device: auto
+seed: 42
+output_dir: results

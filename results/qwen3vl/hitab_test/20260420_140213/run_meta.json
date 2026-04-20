@@ -1,0 +1,8 @@
+{
+  "model": "qwen3vl",
+  "dataset": "hitab",
+  "split": "test",
+  "table_repr": "markdown",
+  "max_samples": 1,
+  "timestamp": "20260420_140213"
+}

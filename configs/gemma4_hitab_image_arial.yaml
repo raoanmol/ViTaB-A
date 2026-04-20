@@ -1,0 +1,13 @@
+experiment_name: gemma4_hitab_image_arial_zeroshot
+model: gemma4
+dataset: hitab
+split: test
+table_repr: image_arial
+prompt_strategy: zero_shot
+task: inference
+max_new_tokens: 512
+temperature: 0.0
+dtype: bfloat16
+device: auto
+seed: 42
+output_dir: results
