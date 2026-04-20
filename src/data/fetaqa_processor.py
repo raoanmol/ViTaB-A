@@ -176,12 +176,19 @@ def column_letter(col_idx):
     return letter
 
 
-def convert_citation(highlighted_cell_ids):
-    """Convert [[row, col], ...] to ["=A1", "=B2", ...] format."""
+def convert_citation(highlighted_cell_ids, row_offset: int = 0):
+    """Convert [[row, col], ...] to Excel-style cell references.
+
+    Args:
+        highlighted_cell_ids: List of [row, col] pairs (0-indexed raw table positions).
+        row_offset: Number of extra rows prepended by the renderer before the table data
+            (e.g. 1 for the column-labels row, +1 more if a title row is present).
+            Add this so that the reference matches the visual row number in the rendered image.
+    """
     citations = []
     for cell in highlighted_cell_ids:
         row, col = cell[0], cell[1]
-        ref = f"={column_letter(col)}{row + 1}"
+        ref = f"={column_letter(col)}{row + 1 + row_offset}"
         citations.append(ref)
     return citations
 
@@ -270,7 +277,11 @@ def main():
                                 f"cell [{r}, {c}] for table of shape ({num_rows}, {num_cols})"
                             )
 
-                    citation = convert_citation(sample.get("highlighted_cell_ids", []))
+                    # Offset to match rendered image row numbers:
+                    # +1 for the column-labels row, +1 if a title row is present.
+                    title = table_json.get("title", "")
+                    row_offset = 1 + (1 if title else 0)
+                    citation = convert_citation(sample.get("highlighted_cell_ids", []), row_offset=row_offset)
 
                     # Generate markdown
                     table_md = table_to_markdown(table_json)

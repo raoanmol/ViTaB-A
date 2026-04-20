@@ -56,5 +56,7 @@ Each sample contains:
 | `answer` | list or string | Answer (list for HiTab, string for FeTaQA) |
 | `citation` | list[str] | Excel-style cell references (e.g. `["=E7"]`) |
 | `table_json` | dict | Simplified table with keys: `title` (string), `header` (list of header rows), `rows` (list of data rows) |
+| `table_md` | string | Markdown representation of the table with Excel-style row/column labels |
+| `table_images` | dict | Table images as base64 PNGs. Keys: `arial`, `times_new_roman`, `red`, `blue`, `green`. Unrendered variants are empty strings. |
 | `source` | string | Source dataset and split (e.g. `hitab_train`) |
 | `source_id` | string | Original ID from source dataset |

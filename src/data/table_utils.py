@@ -106,8 +106,9 @@ def table_to_html(hitab_json: dict, font_family: str = 'Arial',
     texts = hitab_json['texts']
     merged_regions = hitab_json.get('merged_regions', [])
     top_header_rows = hitab_json.get('top_header_rows_num', 0)
-    left_header_cols = hitab_json.get('left_header_columns_num', 0)
     title = hitab_json.get('title', '')
+    if title:
+        top_header_rows = max(0, top_header_rows - 1)
 
     num_rows = len(texts)
     num_cols = len(texts[0]) if texts else 0
@@ -200,7 +201,7 @@ def table_to_html(hitab_json: dict, font_family: str = 'Arial',
                 continue
 
             cell_value = texts[row_idx][col_idx]
-            is_header = (row_idx < top_header_rows) or (col_idx < left_header_cols)
+            is_header = row_idx < top_header_rows
             cell_class = 'header-cell' if is_header else ''
 
             rowspan, colspan = merged_cells.get((row_idx, col_idx), (1, 1))
